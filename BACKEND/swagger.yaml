@@ -1,0 +1,112 @@
+basePath: /
+consumes:
+    - application/json
+definitions:
+    Bicycle:
+        properties:
+            CreatedAt:
+                format: date-time
+                type: string
+            DeletedAt:
+                $ref: '#/definitions/DeletedAt'
+            ID:
+                format: uint64
+                type: integer
+            Latitude:
+                format: double
+                type: number
+            Longitude:
+                format: double
+                type: number
+            Name:
+                description: The name of the User
+                type: string
+            Rented:
+                type: boolean
+            UpdatedAt:
+                format: date-time
+                type: string
+        required:
+            - Name
+        type: object
+        x-go-package: github.com/ragini01/bike-sharing-service/internal/db/models
+    DeletedAt:
+        $ref: '#/definitions/NullTime'
+    Model:
+        description: |-
+            Model a basic GoLang struct which includes the following fields: ID, CreatedAt, UpdatedAt, DeletedAt
+            It may be embedded into your model or you may build your own model without it
+            type User struct {
+            gorm.Model
+            }
+        properties:
+            CreatedAt:
+                format: date-time
+                type: string
+            DeletedAt:
+                $ref: '#/definitions/DeletedAt'
+            ID:
+                format: uint64
+                type: integer
+            UpdatedAt:
+                format: date-time
+                type: string
+        type: object
+        x-go-package: gorm.io/gorm
+    NullTime:
+        description: |-
+            NullTime implements the Scanner interface so
+            it can be used as a scan destination, similar to NullString.
+        properties:
+            Time:
+                format: date-time
+                type: string
+            Valid:
+                type: boolean
+        title: NullTime represents a time.Time that may be null.
+        type: object
+        x-go-package: database/sql
+    User:
+        properties:
+            CreatedAt:
+                format: date-time
+                type: string
+            DeletedAt:
+                $ref: '#/definitions/DeletedAt'
+            ID:
+                format: uint64
+                type: integer
+            Password:
+                type: string
+            UpdatedAt:
+                format: date-time
+                type: string
+            Username:
+                description: The name of the User
+                type: string
+        required:
+            - Username
+        type: object
+        x-go-package: github.com/ragini01/bike-sharing-service/internal/db/models
+host: localhost
+info:
+    version: 1.0.0
+paths:
+    /bicycles:
+        get:
+            description: Insert Documentation
+            operationId: getAllBicycles
+            produces:
+                - application/json
+            responses:
+                "200":
+                    description: bicycle response
+                    schema:
+                        items:
+                            $ref: '#/definitions/bicycles'
+                        type: array
+produces:
+    - application/json
+schemes:
+    - https
+swagger: "2.0"
